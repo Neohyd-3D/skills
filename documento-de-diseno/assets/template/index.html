@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{NAME}} · Documento de diseño</title>
+<meta name="description" content="Fuente única de verdad de la interfaz de {{NAME}}.">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="ui.css">
+<link rel="stylesheet" href="doc.css">
+</head>
+<body>
+<!--
+  PLANTILLA. Reglas para rellenarla (ver SKILL.md y references/metodo.md):
+  - Las secciones condicionales (04 Diagrama de estados, 06 Contratos) se borran si no aplican y se renumera.
+  - El número de fases (J1…Jn), pantallas (S-01…S-NN), componentes y decisiones lo decide el producto.
+  - Cada bloque «⟨…⟩» es un hueco que hay que sustituir. No dejes ninguno.
+  - Pantallas: <figure class="shot" id="S-xx"><div class="scr"><div class="ui-app" style="width:…px;height:…px">…</div></div><figcaption>…</figcaption></figure>
+-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Icono de la app (temporal). Sustitúyelo por el diseñado en la sección de marca; añade una versión simplificada para 16–32 px. -->
+  <symbol id="appicon" viewBox="0 0 100 100">
+    <rect x="10" y="10" width="80" height="80" rx="18.5" fill="var(--brand-primario, #1d1d1f)"/>
+    <text x="50" y="64" text-anchor="middle" font-family="-apple-system, system-ui, sans-serif" font-size="40" font-weight="600" fill="#fff">{{INITIAL}}</text>
+  </symbol>
+</svg>
+
+<button class="ib" id="toc-toggle" aria-label="Índice"><i data-icon="list"></i></button>
+<aside class="toc" aria-label="Índice del documento">
+  <div class="brand"><svg aria-hidden="true"><use href="#appicon"/></svg><div><b>{{NAME}}</b><span>Documento de diseño</span></div></div>
+  <div class="ver"><span class="pill">v0.1.0</span><span class="st">Borrador · pendiente de aprobación</span></div>
+  <nav>
+    <a href="#inicio"><span class="n">00</span>Cómo usar este documento</a>
+    <a href="#principios"><span class="n">01</span>Principios y plataforma</a>
+    <a href="#modelo"><span class="n">02</span>Modelo de objetos</a>
+    <div class="g">Recorrido</div>
+    <a href="#recorrido"><span class="n">03</span>Mapa del recorrido</a>
+    <a href="#J1"><span class="n">J1</span>⟨Fase 1⟩</a>
+    <!-- una entrada por fase -->
+    <div class="g">Comportamiento</div>
+    <a href="#interaccion"><span class="n">04</span>Diagrama de estados</a>
+    <a href="#estados"><span class="n">05</span>Tabla de estados</a>
+    <a href="#contratos"><span class="n">06</span>Contratos</a>
+    <div class="g">Base visual</div>
+    <a href="#sistema"><span class="n">07</span>Sistema de diseño</a>
+    <a href="#componentes"><span class="n">08</span>Componentes</a>
+    <a href="#marca"><span class="n">09</span>Marca</a>
+    <a href="#plataforma"><span class="n">10</span>Convenciones de la plataforma</a>
+    <div class="g">Gobierno</div>
+    <a href="#decisiones"><span class="n">11</span>Decisiones</a>
+    <a href="#verificacion"><span class="n">12</span>Verificación e historial</a>
+  </nav>
+  <div class="theme"><button class="ib" data-theme-toggle></button>Día / noche</div>
+</aside>
+
+<main>
+<div class="wrap">
+<header class="hero" id="inicio">
+  <div class="eb">{{NAME}} · Documento de diseño · v0.1.0</div>
+  <h1>⟨Frase que resume el producto⟩</h1>
+  <p class="lede">Esta página es la <b>fuente única de verdad</b> de la interfaz de {{NAME}}. Describe cada pantalla, estado e interacción con los mismos componentes que usará el producto.</p>
+  <div class="rules">
+    <div class="rule"><span class="num">Regla 1</span><b>Aquí primero</b>Cualquier cambio de interfaz se hace antes en este documento. Se revisa, se aprueba y solo entonces pasa al producto.</div>
+    <div class="rule"><span class="num">Regla 2</span><b>Todo tiene ID</b>Fases <span class="id">J-x</span>, pantallas <span class="id">S-xx</span>, componentes <span class="id">C-xx</span> y decisiones <span class="id">D-xx</span>. El código cita estos ID.</div>
+    <div class="rule"><span class="num">Regla 3</span><b>Los archivos mandan</b><code>tokens.json</code> genera <code>tokens.css</code>; <code>ui.css</code> son los componentes. Las maquetas usan esos mismos archivos.</div>
+  </div>
+  <!-- Si el ejemplo es ficticio: <div class="callout warn"><b>Pendiente: un caso real</b>…</div> -->
+</header>
+
+<!-- ============================================================ 01 -->
+<section class="sec" id="principios"><div class="wrap">
+  <header><div class="kicker">01 · Principios y plataforma</div><h2>⟨Título⟩</h2><p>⟨Cómo se usan los principios para decidir⟩</p></header>
+  <table class="tbl wrap1">
+    <tr><th>Principio</th><th>Qué significa en la interfaz</th></tr>
+    <tr><td><b>P1 · ⟨nombre⟩</b></td><td>⟨consecuencia concreta en pantallas⟩</td></tr>
+  </table>
+  <h3>Plataforma</h3>
+  <div class="cols"><div class="box"><h4>⟨Plataforma y tecnología⟩ <span class="pend">Propuesta</span></h4><p class="small">⟨Por qué; enlace a D-01⟩</p></div><div class="box"><h4>Lo que implica</h4><ul class="tight small"><li>⟨ventanas, navegación, gestos, mínimos⟩</li></ul></div></div>
+</div></section>
+
+<!-- ============================================================ 02 -->
+<section class="sec" id="modelo"><div class="wrap">
+  <header><div class="kicker">02 · Modelo de objetos</div><h2>Qué cosas existen</h2><p>⟨Introducción⟩</p></header>
+  <div class="diagram"><!-- SVG en línea: clases .obj (rect + .hd), .rel (flechas), text.card (cardinalidad). Usa marker para las puntas. -->
+    <svg viewBox="0 0 1000 300" role="img" aria-label="⟨descripción del diagrama⟩"></svg>
+  </div>
+  <table class="tbl wrap1"><tr><th>Objeto</th><th>Reglas</th></tr><tr><td><b>⟨Objeto⟩</b></td><td>⟨creación, borrado, almacenamiento, dependencias⟩</td></tr></table>
+</div></section>
+
+<!-- ============================================================ 03 -->
+<section class="sec" id="recorrido"><div class="wrap">
+  <header><div class="kicker">03 · Recorrido</div><h2>⟨Título⟩</h2><p>⟨De dónde a dónde va el recorrido y cuántas fases tiene⟩</p></header>
+  <!-- Curva opcional de esfuerzo: .feel con un <i style="height:%"> por fase; ajusta grid-template-columns al número de fases -->
+  <div class="journey" style="grid-template-columns:repeat(⟨n⟩,1fr)">
+    <a href="#J1"><span class="id">J1</span>⟨Fase⟩<span>S-01 → S-0x</span></a>
+  </div>
+</div></section>
+
+<!-- ============================================================ J1 (repetir por fase) -->
+<section class="sec" id="J1"><div class="wrap">
+  <header><div class="kicker">J1 · ⟨Fase⟩</div><h2>⟨Título con intención⟩</h2><p>⟨Qué pasa en esta fase⟩</p></header>
+
+  <figure class="shot" id="S-01"><div class="scr"><div class="ui-app" data-scene="ventana" style="width:1000px;height:625px">
+    <div class="ui-empty"><svg class="glyph" aria-hidden="true"><use href="#appicon"/></svg><h3>⟨Título del estado vacío⟩</h3><p>⟨Qué hacer para empezar⟩</p><div class="row"><button class="ui-btn primary lg">⟨Acción principal⟩</button></div></div>
+  </div></div><figcaption><span class="id">S-01</span><b>⟨Nombre.⟩</b> ⟨Comportamiento que la imagen no enseña.⟩</figcaption></figure>
+
+  <h4>Interacciones</h4>
+  <table class="ix"><tr><th>Acción</th><th>Resultado</th></tr><tr><td>⟨acción⟩</td><td>⟨resultado, con texto exacto en <span class="copy">…</span>⟩</td></tr></table>
+  <h4>Textos</h4>
+  <table class="ix"><tr><th>Momento</th><th>Texto</th></tr><tr><td>⟨momento⟩</td><td class="copy">⟨texto⟩</td></tr></table>
+</div></section>
+
+<!-- ============================================================ 04 (si aplica) -->
+<section class="sec" id="interaccion"><div class="wrap">
+  <header><div class="kicker">04 · Diagrama de estados</div><h2>⟨Superficie principal⟩ como máquina de estados</h2><p>⟨Regla de Esc, de deshacer y de modos bloqueantes⟩</p></header>
+  <div class="diagram"><!-- SVG: g.st (rect + text), g.st.hub para los centrales, g.st.modal para los que bloquean; path.ar con marker -->
+    <svg viewBox="0 0 1000 400" role="img" aria-label="⟨descripción⟩"></svg>
+  </div>
+  <table class="tbl wrap1"><tr><th>Desde</th><th>Evento</th><th>Hacia</th><th>Efecto</th></tr><tr><td>⟨estado⟩</td><td>⟨evento⟩</td><td>⟨estado⟩</td><td>⟨efecto⟩</td></tr></table>
+</div></section>
+
+<!-- ============================================================ 05 -->
+<section class="sec" id="estados"><div class="wrap">
+  <header><div class="kicker">05 · Tabla de estados</div><h2>Ningún hueco sin respuesta</h2><p>Cada objeto contra cada estado posible. <code>tools/check.py</code> falla si hay una celda vacía o un «N/A» sin motivo.</p></header>
+  <div class="scroll"><table class="tbl matrix" id="matrix">
+    <!-- Columnas: elige del catálogo de references/estados.md las que apliquen al producto -->
+    <thead><tr><th>Objeto</th><th>Vacío</th><th>Cargando</th><th>Error</th><th>⟨…⟩</th></tr></thead>
+    <tbody>
+    <!-- <tr><td>Objeto</td><td>…</td>…</tr> una fila por objeto (o por tipo si se comportan distinto) -->
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- ============================================================ 06 (si aplica) -->
+<section class="sec" id="contratos"><div class="wrap">
+  <header><div class="kicker">06 · Contratos</div><h2>Qué entra, qué sale, qué pasa si falla</h2><p>⟨Integraciones del producto⟩</p></header>
+  <div class="cols"><div><h4>Entrada</h4><pre class="box mono" style="font-size:12px;overflow:auto;margin:0">⟨JSON de ejemplo⟩</pre></div><div><h4>Salida</h4><pre class="box mono" style="font-size:12px;overflow:auto;margin:0">⟨JSON de ejemplo⟩</pre></div></div>
+  <h4>Reglas</h4>
+  <table class="tbl wrap1"><tr><td><b>Privacidad</b></td><td>⟨qué sale y qué nunca sale⟩</td></tr><tr><td><b>Errores</b></td><td>⟨cada error con su texto y su salida⟩</td></tr></table>
+  <!-- Salidas para terceros: especificación y <iframe class="out" src="ejemplo/….html" title="…"></iframe> -->
+</div></section>
+
+<!-- ============================================================ 07 -->
+<section class="sec" id="sistema"><div class="wrap">
+  <header><div class="kicker">07 · Sistema de diseño</div><h2>Tokens</h2><p>Todo valor visual sale de <a href="tokens.json"><code>tokens.json</code></a> (W3C DTCG). <code>python3 tools/build_tokens.py</code> genera <code>tokens.css</code> y <code>tokens.js</code>; estas tablas se leen de ahí.</p></header>
+  <h3>Color</h3>
+  <p class="muted">Cada muestra: modo día (izquierda) y modo noche (derecha).</p>
+  <table class="tbl wrap1"><thead><tr><th>Muestra</th><th>Token</th><th>Día / noche</th><th>Uso</th></tr></thead><tbody id="tok-color"></tbody></table>
+  <div id="tok-groups"></div>
+  <h3>Contraste</h3>
+  <p class="muted">Calculado en vivo con el tema activo (<span id="contrast-mode"></span>). Los pares se declaran en <code>tokens.json → $extensions.doc.contrast</code>.</p>
+  <table class="tbl"><thead><tr><th></th><th>Par</th><th>Contraste</th><th>Mínimo</th><th></th></tr></thead><tbody id="contrast"></tbody></table>
+  <h3>Tipografía</h3>
+  <p class="muted">⟨Familias y para qué se usa cada una⟩</p>
+  <table class="tbl"><thead><tr><th>Token</th><th>Tamaño</th><th>Muestra</th><th>Uso</th></tr></thead><tbody id="tok-type"></tbody></table>
+  <h3>Espaciado, radios, sombras y movimiento</h3>
+  <div class="cols"><div><h4>Espaciado</h4><div class="spaces" id="tok-space"></div></div><div><h4>Movimiento</h4><table class="tbl"><tbody id="tok-motion"></tbody></table><p class="small muted">⟨Qué cambia con «reducir movimiento»⟩</p></div></div>
+  <h4>Radios</h4><div class="radii" id="tok-radius"></div>
+  <h4>Sombras</h4><div class="shadows" id="tok-shadow"></div>
+  <h3>Iconos</h3>
+  <p class="muted">⟨Estilo del trazo; equivalente nativo debajo de cada uno⟩</p>
+  <div class="icons" id="icons"></div>
+</div></section>
+
+<!-- ============================================================ 08 -->
+<section class="sec" id="componentes"><div class="wrap">
+  <header><div class="kicker">08 · Componentes</div><h2>Piezas</h2><p>Cada componente vive en <a href="ui.css"><code>ui.css</code></a> y aquí se ve vivo.</p></header>
+  <div class="comp" id="C-01"><div class="comp-h"><h3><span class="id">C-01</span>Botón</h3><p><code>.ui-btn</code> · ⟨alto, cuántos principales por vista⟩</p></div>
+    <div class="demo ui-app"><div class="cell"><button class="ui-btn primary">Principal</button><span class="lbl">primary</span></div><div class="cell"><button class="ui-btn">Secundario</button><span class="lbl">por defecto</span></div><div class="cell"><button class="ui-btn ghost">Terciario</button><span class="lbl">ghost</span></div><div class="cell"><button class="ui-btn danger primary">Eliminar</button><span class="lbl">danger</span></div><div class="cell"><button class="ui-btn primary is-disabled">Desactivado</button><span class="lbl">desactivado</span></div><div class="cell"><button class="ui-btn primary is-loading">Cargando</button><span class="lbl">cargando</span></div></div>
+    <div class="spec"><div><h5>Variantes</h5><ul><li>⟨…⟩</li></ul></div><div><h5>Estados</h5><ul><li>⟨…⟩</li></ul></div><div><h5>Teclado y accesibilidad</h5><ul><li>⟨…⟩</li></ul></div></div></div>
+  <!-- una ficha .comp#C-xx por componente que aparezca en las pantallas -->
+</div></section>
+
+<!-- ============================================================ 09 -->
+<section class="sec" id="marca"><div class="wrap">
+  <header><div class="kicker">09 · Marca ⟨temporal⟩</div><h2>⟨Título⟩</h2><p>⟨Alcance: qué incluye y qué no⟩</p></header>
+  <h4>Icono a sus tamaños</h4>
+  <div class="brandrow"><div class="cell"><svg width="160" height="160" aria-hidden="true"><use href="#appicon"/></svg>grande</div><div class="cell"><svg width="64" height="64" aria-hidden="true"><use href="#appicon"/></svg>64</div><div class="cell"><svg width="32" height="32" aria-hidden="true"><use href="#appicon"/></svg>32</div><div class="cell"><svg width="16" height="16" aria-hidden="true"><use href="#appicon"/></svg>16</div></div>
+  <h4>Voz</h4>
+  <div class="do-dont"><div class="do"><h5>Así</h5><ul><li>⟨…⟩</li></ul></div><div class="dont"><h5>Así no</h5><ul><li>⟨…⟩</li></ul></div></div>
+</div></section>
+
+<!-- ============================================================ 10 -->
+<section class="sec" id="plataforma"><div class="wrap">
+  <header><div class="kicker">10 · Convenciones de la plataforma</div><h2>⟨Título⟩</h2><p>⟨Lo que se espera de cualquier app de esta plataforma⟩</p></header>
+  <!-- Recorre references/plataformas.md. Menús: .menus > div > .ui-menu (posición estática dentro de .menus) -->
+  <table class="tbl wrap1"><tr><td><b>⟨Comportamiento⟩</b></td><td>⟨cómo lo resuelve el producto⟩</td></tr></table>
+</div></section>
+
+<!-- ============================================================ 11 -->
+<section class="sec" id="decisiones"><div class="wrap">
+  <header><div class="kicker">11 · Decisiones</div><h2>Por qué es así</h2><p>Cada decisión con sus alternativas. Las marcadas como propuesta necesitan aprobación.</p></header>
+  <div class="dec" id="D-01"><span class="id">D-01</span><div><h4>⟨Decisión⟩ <span class="pend">Propuesta</span></h4><p>⟨Qué y por qué⟩</p><p class="alt">Descartadas: ⟨alternativas y motivo⟩</p></div></div>
+</div></section>
+
+<!-- ============================================================ 12 -->
+<section class="sec" id="verificacion"><div class="wrap">
+  <header><div class="kicker">12 · Verificación e historial</div><h2>Cómo sabemos que está bien</h2><p>Comprobaciones que no dependen de opiniones. Las automáticas: <code>python3 tools/check.py</code>.</p></header>
+  <table class="tbl wrap1">
+    <tr><th>Criterio</th><th>Cómo se comprueba</th><th>Estado</th></tr>
+    <tr><td>Un caso real recorre el documento sin huecos</td><td>Recorrer J1–Jn con material real y anotar lo que no tenga respuesta.</td><td><span class="pend">Pendiente</span></td></tr>
+    <tr><td>La tabla de estados no tiene celdas vacías</td><td><code>check.py</code></td><td data-check="matrix">—</td></tr>
+    <tr><td>Contraste AA en todos los temas</td><td><code>check.py</code> desde <code>tokens.json</code></td><td data-check="contrast">—</td></tr>
+    <tr><td>ID únicos, enlaces internos válidos y pantallas sin huecos</td><td><code>check.py</code></td><td data-check="ids">—</td></tr>
+    <tr><td>Lo usan 3–5 personas del público objetivo sin ayuda</td><td>Prueba con un prototipo y tareas cronometradas.</td><td><span class="pend">Cuando haya prototipo</span></td></tr>
+    <tr><td>El producto no se desvía del documento</td><td>Capturas de cada S-xx en el producto comparadas con este documento.</td><td><span class="pend">Cuando haya producto</span></td></tr>
+  </table>
+  <h3>Historial</h3>
+  <table class="tbl wrap1"><tr><th>Versión</th><th>Fecha</th><th>Cambios</th></tr><tr><td><code>0.1.0</code></td><td>{{DATE}}</td><td>Primera versión.</td></tr></table>
+</div></section>
+</div>
+</main>
+<script src="tokens.js"></script>
+<script src="icons.js"></script>
+<script src="scenes.js"></script>
+<script src="doc.js"></script>
+</body>
+</html>
